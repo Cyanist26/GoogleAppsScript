@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" type="text/css" href="https://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    
+    <script>
+      function showInfo(info) {       
+        var mail = document.getElementById('mail');
+        var content = document.getElementById('content');
+        mail.innerHTML = "getEffectiveUser().getEmail(): " + info[0];
+        content.innerHTML = info.join("—");
+      }
+
+      google.script.run.withSuccessHandler(showInfo)
+          .getInfo();
+      
+      function onFailure(error) {
+        var mail = document.getElementById('mail');
+        mail.innerHTML = "ERROR: " + error.message;
+      }
+
+      google.script.run.withFailureHandler(onFailure)
+          .getInfo();
+    </script>
+  </head>
+  <body>
+    <div id="mail"></div>
+    <div id="content"></div>
+  </body>
+</html>
+
+
